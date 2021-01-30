@@ -1,11 +1,16 @@
 package com.nnicolosi.theater.services
 
 import com.nnicolosi.theater.domain.Seat
+import com.nnicolosi.theater.repositories.ISeatRepository
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.math.BigDecimal
 
 @Service
-class TheaterService {
+class BootstrapService {
+
+    @Autowired
+    lateinit var seatRepository: ISeatRepository
 
     private val hiddenSeats = mutableListOf<Seat>()
 
@@ -40,8 +45,4 @@ class TheaterService {
 
 	val seats
     get() = hiddenSeats.toList()
-
-    fun find(seatNum: Int, seatRow: Char): Seat {
-        return seats.first { it.seatNum == seatNum && it.rowId == seatRow }
-    }
 }

@@ -1,12 +1,10 @@
 package com.nnicolosi.theater.controllers
 
 import com.nnicolosi.theater.repositories.IPerformanceRepository
-import com.nnicolosi.theater.repositories.ISeatRepository
 import com.nnicolosi.theater.domain.Booking
 import com.nnicolosi.theater.domain.Performance
 import com.nnicolosi.theater.domain.Seat
 import com.nnicolosi.theater.services.BookingService
-import com.nnicolosi.theater.services.TheaterService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
@@ -18,12 +16,6 @@ class MainController {
 
     @Autowired
     lateinit var bookingService: BookingService
-
-    @Autowired
-    lateinit var theaterService: TheaterService
-
-    @Autowired
-    lateinit var seatRepository: ISeatRepository
 
     @Autowired
     lateinit var performanceRepository: IPerformanceRepository
@@ -71,15 +63,6 @@ class MainController {
         val booking = bookingService.reserveSeat(bean.seat!!, bean.performance!!, bean.customerName)
 
         return ModelAndView("bookingConfirmed", "booking", booking)
-    }
-
-    @RequestMapping("bootstrap")
-    fun createInitialData(): ModelAndView {
-        // create the data and save to the db
-        val seats = theaterService.seats
-        seatRepository.saveAll(seats)
-
-        return homePage()
     }
 }
 
