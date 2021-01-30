@@ -1,6 +1,6 @@
 package com.nnicolosi.theater.controllers
 
-import com.nnicolosi.theater.data.PerformanceRepository
+import com.nnicolosi.theater.repositories.IPerformanceRepository
 import com.nnicolosi.theater.domain.Performance
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
@@ -8,14 +8,12 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.servlet.ModelAndView
 
-
-
 @Controller
 @RequestMapping("/performances")
 class PerformanceController() {
 
     @Autowired
-    lateinit var performanceRepository: PerformanceRepository
+    lateinit var performanceRepository: IPerformanceRepository
 
     @RequestMapping("")
     fun performancesHomePage() =

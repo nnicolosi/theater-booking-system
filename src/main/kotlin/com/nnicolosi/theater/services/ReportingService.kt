@@ -1,6 +1,6 @@
 package com.nnicolosi.theater.services
 
-import com.nnicolosi.theater.data.BookingRepository
+import com.nnicolosi.theater.repositories.IBookingRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.math.BigDecimal
@@ -9,7 +9,7 @@ import java.math.BigDecimal
 class ReportingService {
 
     @Autowired
-    lateinit var bookingRepository: BookingRepository
+    lateinit var bookingRepository: IBookingRepository
 
     fun all_bookings() : String {
         val bookings = bookingRepository.findAll()

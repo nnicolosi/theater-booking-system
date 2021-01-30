@@ -1,7 +1,7 @@
 package com.nnicolosi.theater.services
 
-import com.nnicolosi.theater.data.BookingRepository
-import com.nnicolosi.theater.data.SeatRepository
+import com.nnicolosi.theater.repositories.IBookingRepository
+import com.nnicolosi.theater.repositories.ISeatRepository
 import com.nnicolosi.theater.domain.Booking
 import com.nnicolosi.theater.domain.Performance
 import com.nnicolosi.theater.domain.Seat
@@ -12,10 +12,10 @@ import org.springframework.stereotype.Service
 class BookingService()  {
 
     @Autowired
-    lateinit var bookingRepository: BookingRepository
+    lateinit var bookingRepository: IBookingRepository
 
     @Autowired
-    lateinit var seatRepository: SeatRepository
+    lateinit var seatRepository: ISeatRepository
 
     fun findSeat(seatNum: Int, seatRow: Char): Seat? {
         return seatRepository.findAll().firstOrNull { it.seatNum == seatNum && it.rowId == seatRow }

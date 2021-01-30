@@ -1,7 +1,7 @@
 package com.nnicolosi.theater.controllers
 
-import com.nnicolosi.theater.data.PerformanceRepository
-import com.nnicolosi.theater.data.SeatRepository
+import com.nnicolosi.theater.repositories.IPerformanceRepository
+import com.nnicolosi.theater.repositories.ISeatRepository
 import com.nnicolosi.theater.domain.Booking
 import com.nnicolosi.theater.domain.Performance
 import com.nnicolosi.theater.domain.Seat
@@ -23,10 +23,10 @@ class MainController {
     lateinit var theaterService: TheaterService
 
     @Autowired
-    lateinit var seatRepository: SeatRepository
+    lateinit var seatRepository: ISeatRepository
 
     @Autowired
-    lateinit var performanceRepository: PerformanceRepository
+    lateinit var performanceRepository: IPerformanceRepository
 
     @RequestMapping("")
     fun homePage(): ModelAndView {
