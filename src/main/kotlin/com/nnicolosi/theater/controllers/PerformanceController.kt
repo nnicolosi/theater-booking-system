@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.servlet.ModelAndView
+import org.springframework.web.servlet.view.RedirectView
 
 @Controller
 @RequestMapping("/performances")
@@ -17,16 +18,15 @@ class PerformanceController() {
 
     @RequestMapping("")
     fun performancesHomePage() =
-            ModelAndView("performances/home","performances", performanceRepository.findAll())
+            ModelAndView("performances/list","performances", performanceRepository.findAll())
 
     @RequestMapping("/add")
     fun addPerformance() =
             ModelAndView("performances/add","performance", Performance(0,""))
 
     @RequestMapping("save", method = arrayOf(RequestMethod.POST))
-    fun savePerformance(performance: Performance) : String {
+    fun savePerformance(performance: Performance) : RedirectView {
         performanceRepository.save(performance)
-        return "redirect:/performances/"
+        return RedirectView("/performances")
     }
-
 }

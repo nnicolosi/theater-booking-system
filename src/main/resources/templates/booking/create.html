@@ -8,7 +8,7 @@
     <h1>Theater Booking</h1>
 <h2>Seat availability</h2>
 
-    <form action="/checkAvailability" th:object="${bean}" method="POST">
+    <form action="/booking/checkAvailability" th:object="${bean}" method="POST">
         <p>Check if seat number
             <select th:field="*{selectedSeatNum}">
                 <option th:each="n : ${seatNums}" th:value="${n}" th:text="${n}" />

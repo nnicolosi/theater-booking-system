@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Theater Booking</title>
+</head>
+<body>
+    <h1>Theater Booking System</h1>
+
+    <a href="/booking">Book a seat for a performance</a>
+    </br>
+    <a href="/performances">View performances</a>
+    </br>
+    <a href="/reports">View reports</a>
+    </br>
+
+    <div th:if="${!bootstrapped}">
+        <a href="/bootstrap/initialize">Bootstrap application data</a>
+    </div>
+
+</body>
+</html>

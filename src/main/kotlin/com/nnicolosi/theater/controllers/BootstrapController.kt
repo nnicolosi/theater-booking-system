@@ -19,8 +19,10 @@ class BootstrapController {
 
     @RequestMapping("/initialize")
     fun initialize(): RedirectView {
-        val seats = bootstrapService.seats
-        seatRepository.saveAll(seats)
+        if (seatRepository.findAll().size == 0) {
+            val seats = bootstrapService.seats
+            seatRepository.saveAll(seats)
+        }
 
         return RedirectView("/")
     }
