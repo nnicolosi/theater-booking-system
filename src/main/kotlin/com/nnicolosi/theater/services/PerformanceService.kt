@@ -17,4 +17,6 @@ class PerformanceService {
     fun findById(id: Long): Optional<Performance> = performanceRepository.findById(id)
 
     fun save(performance: Performance): Performance = performanceRepository.save(performance)
+
+    fun saveAll(performances: List<Performance>): List<Performance> = performanceRepository.saveAll(performances)
 }

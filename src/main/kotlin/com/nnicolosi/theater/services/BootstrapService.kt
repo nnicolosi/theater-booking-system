@@ -1,5 +1,6 @@
 package com.nnicolosi.theater.services
 
+import com.nnicolosi.theater.domain.Performance
 import com.nnicolosi.theater.domain.Seat
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -11,9 +12,15 @@ class BootstrapService {
     @Autowired
     lateinit var seatService: SeatService
 
+    @Autowired
+    lateinit var performanceService: PerformanceService
+
     fun initialize() {
         if (seatService.findAll().isEmpty()) {
             seatService.saveAll(generateSeats())
+        }
+        if (performanceService.findAll().isEmpty()) {
+            performanceService.saveAll(generatePerformances())
         }
     }
 
@@ -47,5 +54,13 @@ class BootstrapService {
         }
 
         return seats
+    }
+
+    fun generatePerformances(): List<Performance> {
+        return listOf(
+            Performance(0, "Hamilton"),
+            Performance(0, "Pirates of Penzance"),
+            Performance(0, "West Side Story")
+        )
     }
 }

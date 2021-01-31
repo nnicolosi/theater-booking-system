@@ -12,9 +12,9 @@
         <span>|&nbsp;&nbsp;<a href="/reports">Reports</a>&nbsp;&nbsp;|</span>
     </nav>
 
-    <h1>All performances</h1>
+    <h1>All Performances</h1>
 
-    <table>
+    <table th:if="${performances.size > 0}">
         <tr>
             <th>ID</th>
             <th>Title</th>
@@ -25,6 +25,13 @@
         </tr>
     </table>
 
-    <a href="/performances/add">Add a performance</a>
+    <div th:if="${performances.size == 0}">
+        <p>There are no performances scheduled at this time.</p>
+    </div>
+
+    <p>
+        <a href="/performances/add">Add a performance</a>
+    </p>
+
 </body>
 </html>
