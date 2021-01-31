@@ -5,46 +5,48 @@
     <title>Theater Booking</title>
 </head>
 <body>
-<nav>
-    <span>|&nbsp;&nbsp;<a href="/">Home</a></span>
-    <span>|&nbsp;&nbsp;<a href="/booking">Booking</a></span>
-    <span>|&nbsp;&nbsp;<a href="/performances">Performances</a></span>
-    <span>|&nbsp;&nbsp;<a href="/reports">Reports</a>&nbsp;&nbsp;|</span>
-</nav>
-<h1>Theater Booking</h1>
-<h2>Seat availability</h2>
+    <nav>
+        <span>|&nbsp;&nbsp;<a href="/">Home</a></span>
+        <span>|&nbsp;&nbsp;<a href="/booking">Booking</a></span>
+        <span>|&nbsp;&nbsp;<a href="/performances">Performances</a></span>
+        <span>|&nbsp;&nbsp;<a href="/reports">Reports</a>&nbsp;&nbsp;|</span>
+    </nav>
 
-<form action="/booking/checkAvailability" th:object="${bean}" method="POST">
-    <p>Check if seat number
-        <select th:field="*{selectedSeatNum}">
-            <option th:each="n : ${seatNums}" th:value="${n}" th:text="${n}"/>
-        </select>
-        in row
-        <select th:field="*{selectedSeatRow}">
-            <option th:each="r : ${seatRows}" th:value="${r}" th:text="${r}"/>
-        </select>
-        is available for performance
-        <select th:field="*{selectedPerformance}">
-            <option th:each="p : ${performances}" th:value="${p.id}" th:text="${p.title}"/>
-        </select>
-        <input type="submit"/></p>
-</form>
+    <h1>Theater Booking</h1>
 
-<div th:if="${bean.available}">
-    Seat <span th:text="${bean.seat}">seatNumber</span> is available for this performance - do you want to book it?
+    <h2>Seat availability</h2>
 
-    <form action="/booking" method="POST" th:object="${bean}">
-        <input type="hidden" th:field="*{seat}"/>
-        <input type="hidden" th:field="*{performance}"/>
-        Customer Name: <input type="text" th:field="*{customerName}"/>
-        <input type="submit" value="Book now"/>
+    <form action="/booking/checkAvailability" th:object="${bean}" method="POST">
+        <p>Check if seat number
+            <select th:field="*{selectedSeatNum}">
+                <option th:each="n : ${seatNums}" th:value="${n}" th:text="${n}"/>
+            </select>
+            in row
+            <select th:field="*{selectedSeatRow}">
+                <option th:each="r : ${seatRows}" th:value="${r}" th:text="${r}"/>
+            </select>
+            is available for performance
+            <select th:field="*{selectedPerformance}">
+                <option th:each="p : ${performances}" th:value="${p.id}" th:text="${p.title}"/>
+            </select>
+            <input type="submit"/></p>
     </form>
-</div>
 
-<p th:if="${bean.available== false}">
-    I'm sorry - this seat is already booked for this performance. The customer is <span
-        th:text="${bean.booking.customerName}" }></span></a>
-</p>
+    <div th:if="${bean.available}">
+        Seat <span th:text="${bean.seat}">seatNumber</span> is available for this performance - do you want to book it?
+
+        <form action="/booking" method="POST" th:object="${bean}">
+            <input type="hidden" th:field="*{seat}"/>
+            <input type="hidden" th:field="*{performance}"/>
+            Customer Name: <input type="text" th:field="*{customerName}"/>
+            <input type="submit" value="Book now"/>
+        </form>
+    </div>
+
+    <p th:if="${bean.available== false}">
+        I'm sorry - this seat is already booked for this performance. The customer is
+        <span th:text="${bean.booking.customerName}" }></span>
+    </p>
 
 </body>
 </html>

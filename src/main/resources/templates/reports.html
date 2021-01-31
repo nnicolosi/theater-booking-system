@@ -5,25 +5,26 @@
     <title>Reports</title>
 </head>
 <body>
-<nav>
-    <span>|&nbsp;&nbsp;<a href="/">Home</a></span>
-    <span>|&nbsp;&nbsp;<a href="/booking">Booking</a></span>
-    <span>|&nbsp;&nbsp;<a href="/performances">Performances</a></span>
-    <span>|&nbsp;&nbsp;<a href="/reports">Reports</a>&nbsp;&nbsp;|</span>
-</nav>
-<h1>Reports</h1>
+    <nav>
+        <span>|&nbsp;&nbsp;<a href="/">Home</a></span>
+        <span>|&nbsp;&nbsp;<a href="/booking">Booking</a></span>
+        <span>|&nbsp;&nbsp;<a href="/performances">Performances</a></span>
+        <span>|&nbsp;&nbsp;<a href="/reports">Reports</a>&nbsp;&nbsp;|</span>
+    </nav>
 
-<form action="/reports/getReport" method="GET">
-    <select name="report" id="report">
-        <option th:each="report : ${reports}" th:value="${report}" th:text="${report}"></option>
-    </select>
-    <input type="submit" value="get"/>
-</form>
+    <h1>Reports</h1>
 
-<div th:if="${result}">
-    <h2>Report</h2>
-    <div th:utext="${result}"></div>
-</div>
+    <form action="/reports/getReport" method="GET">
+        <select name="report" id="report">
+            <option th:each="report : ${reports}" th:value="${report}" th:text="${report}"></option>
+        </select>
+        <input type="submit" value="get"/>
+    </form>
+
+    <div th:if="${result}">
+        <h2>Report</h2>
+        <div th:utext="${result}"></div>
+    </div>
 
 </body>
 </html>

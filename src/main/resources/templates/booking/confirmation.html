@@ -5,16 +5,19 @@
     <title>Booking Confirmed</title>
 </head>
 <body>
-<nav>
-    <span>|&nbsp;&nbsp;<a href="/">Home</a></span>
-    <span>|&nbsp;&nbsp;<a href="/booking">Booking</a></span>
-    <span>|&nbsp;&nbsp;<a href="/performances">Performances</a></span>
-    <span>|&nbsp;&nbsp;<a href="/reports">Reports</a>&nbsp;&nbsp;|</span>
-</nav>
-<h1>Booking Confirmed</h1>
-<p>Seat : <span th:text="${booking.seat}">seat</span></p>
-<p>Performance : <span th:text="${booking.performance.title}">performance</span></p>
-<p>Customer : <span th:text="${booking.customerName}">customer</span></p>
-<a href="/booking">Book another</a>
+    <nav>
+        <span>|&nbsp;&nbsp;<a href="/">Home</a></span>
+        <span>|&nbsp;&nbsp;<a href="/booking">Booking</a></span>
+        <span>|&nbsp;&nbsp;<a href="/performances">Performances</a></span>
+        <span>|&nbsp;&nbsp;<a href="/reports">Reports</a>&nbsp;&nbsp;|</span>
+    </nav>
+
+    <h1>Booking Confirmed</h1>
+
+    <p>Seat : <span th:text="${booking.seat}">seat</span></p>
+    <p>Performance : <span th:text="${booking.performance.title}">performance</span></p>
+    <p>Customer : <span th:text="${booking.customerName}">customer</span></p>
+
+    <a href="/booking">Book another</a>
 </body>
 </html>
