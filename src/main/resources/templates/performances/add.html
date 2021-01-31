@@ -5,11 +5,17 @@
     <title>Add a performance</title>
 </head>
 <body>
-    <h1>Add a performance</h1>
-    <form action="/performances/save" method="POST" th:object="${performance}">
-        <input type="hidden" th:field="*{id}"
-        <p>Name of performance: <input type="text" th:field="*{title}" /> </p>
-        <input type="submit" />
-    </form>
+<nav>
+    <span>|&nbsp;&nbsp;<a href="/">Home</a></span>
+    <span>|&nbsp;&nbsp;<a href="/booking">Booking</a></span>
+    <span>|&nbsp;&nbsp;<a href="/performances">Performances</a></span>
+    <span>|&nbsp;&nbsp;<a href="/reports">Reports</a>&nbsp;&nbsp;|</span>
+</nav>
+<h1>Add a performance</h1>
+<form action="/performances/save" method="POST" th:object="${performance}">
+    <input type="hidden" th:field="*{id}"/>
+    <p>Name of performance: <input type="text" th:field="*{title}"/></p>
+    <input type="submit"/>
+</form>
 </body>
 </html>
