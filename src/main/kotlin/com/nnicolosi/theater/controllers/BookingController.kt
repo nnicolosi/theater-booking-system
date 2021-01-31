@@ -1,10 +1,11 @@
 package com.nnicolosi.theater.controllers
 
-import com.nnicolosi.theater.repositories.IPerformanceRepository
 import com.nnicolosi.theater.domain.Booking
 import com.nnicolosi.theater.domain.Performance
 import com.nnicolosi.theater.domain.Seat
 import com.nnicolosi.theater.services.BookingService
+import com.nnicolosi.theater.services.PerformanceService
+import com.nnicolosi.theater.services.SeatService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
@@ -19,13 +20,16 @@ class BookingController {
     lateinit var bookingService: BookingService
 
     @Autowired
-    lateinit var performanceRepository: IPerformanceRepository
+    lateinit var seatService: SeatService
+
+    @Autowired
+    lateinit var performanceService: PerformanceService
 
     @RequestMapping("", method = [RequestMethod.GET])
     fun begin(): ModelAndView {
         val model = mapOf(
             "bean" to CheckAvailabilityBackingBean(),
-            "performances" to performanceRepository.findAll(),
+            "performances" to performanceService.findAll(),
             "seatNums" to 1..36,
             "seatRows" to 'A'..'O'
         )
@@ -35,13 +39,13 @@ class BookingController {
 
     @RequestMapping("checkAvailability", method = [RequestMethod.POST])
     fun checkAvailability(bean: CheckAvailabilityBackingBean): ModelAndView {
-        val selectedSeat: Seat = bookingService.findSeat(bean.selectedSeatNum, bean.selectedSeatRow)!!
-        val selectedPerformance = performanceRepository.findById(bean.selectedPerformance!!).get()
+        val selectedSeat: Seat = seatService.findSeat(bean.selectedSeatNum, bean.selectedSeatRow)!!
+        val selectedPerformance = performanceService.findById(bean.selectedPerformance!!).get()
 
         bean.seat = selectedSeat
         bean.performance = selectedPerformance
 
-        val isAvailable = bookingService.isSeatFree(selectedSeat, selectedPerformance)
+        val isAvailable = bookingService.isSeatAvailableForBooking(selectedSeat, selectedPerformance)
 
         if (!isAvailable) {
             bean.booking = bookingService.findBooking(selectedSeat, selectedPerformance)
@@ -51,7 +55,7 @@ class BookingController {
 
         val model = mapOf(
             "bean" to bean,
-            "performances" to performanceRepository.findAll(),
+            "performances" to performanceService.findAll(),
             "seatNums" to 1..36,
             "seatRows" to 'A'..'O'
         )
@@ -61,7 +65,7 @@ class BookingController {
 
     @RequestMapping("", method = [RequestMethod.POST])
     fun createBooking(bean: CheckAvailabilityBackingBean): ModelAndView {
-        val booking = bookingService.reserveSeat(bean.seat!!, bean.performance!!, bean.customerName)
+        val booking = bookingService.createBooking(bean.seat!!, bean.performance!!, bean.customerName)
 
         return ModelAndView("booking/confirmation", "booking", booking)
     }

@@ -1,18 +1,17 @@
 package com.nnicolosi.theater.services
 
-import com.nnicolosi.theater.repositories.IBookingRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.math.BigDecimal
 
 @Service
-class ReportingService {
+class ReportService {
 
     @Autowired
-    lateinit var bookingRepository: IBookingRepository
+    lateinit var bookingService: BookingService
 
     fun all_bookings() : String {
-        val bookings = bookingRepository.findAll()
+        val bookings = bookingService.findAll()
         val htmlBookings = bookings.map {"<tr><td>${it.performance.title}</td><td>${it.seat}</td><td>${it.customerName}</td></tr>"}
         val reportHeader = "<table><tr><th>Performance</th><th>Seat</th><th>Customer</th></tr>"
         val reportFooter = "</table>"
@@ -20,7 +19,7 @@ class ReportingService {
     }
 
     fun premium_bookings() : String {
-        val bookings = bookingRepository.findAll()
+        val bookings = bookingService.findAll()
         val htmlBookings = bookings
                 .filter {it.seat.price > BigDecimal(15) }
                 .map {"<tr><td>${it.performance.title}</td><td>${it.seat}</td><td>${it.customerName}</td></tr>"}
@@ -28,5 +27,4 @@ class ReportingService {
         val reportFooter = "</table>"
         return "${reportHeader}${htmlBookings.joinToString("")}${reportFooter}"
     }
-
 }

@@ -1,6 +1,6 @@
 package com.nnicolosi.theater.controllers
 
-import com.nnicolosi.theater.services.ReportingService
+import com.nnicolosi.theater.services.ReportService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
@@ -10,10 +10,10 @@ import kotlin.reflect.full.declaredMemberFunctions
 
 @Controller
 @RequestMapping("/reports")
-class ReportsController {
+class ReportController {
 
     @Autowired
-    lateinit var reportingService: ReportingService
+    lateinit var reportingService: ReportService
 
     private fun getListOfReports() = reportingService::class.declaredMemberFunctions.map { it.name }
 

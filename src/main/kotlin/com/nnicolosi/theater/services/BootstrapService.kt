@@ -1,7 +1,6 @@
 package com.nnicolosi.theater.services
 
 import com.nnicolosi.theater.domain.Seat
-import com.nnicolosi.theater.repositories.ISeatRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.math.BigDecimal
@@ -10,11 +9,16 @@ import java.math.BigDecimal
 class BootstrapService {
 
     @Autowired
-    lateinit var seatRepository: ISeatRepository
+    lateinit var seatService: SeatService
 
-    private val hiddenSeats = mutableListOf<Seat>()
+    fun initialize() {
+        if (seatService.findAll().isEmpty()) {
+            seatService.saveAll(generateSeats())
+        }
+    }
 
-    constructor() {
+    fun generateSeats(): List<Seat> {
+        val seats = mutableListOf<Seat>()
 
         fun getPrice(row: Int, num: Int) : BigDecimal {
             return when {
@@ -38,11 +42,10 @@ class BootstrapService {
 
         for (row in 1..15) {
             for (num in 1..36) {
-                hiddenSeats.add(Seat(0, (row+64).toChar(), num, getPrice(row,num), getDescription(row,num) ))
+                seats.add(Seat(0, (row+64).toChar(), num, getPrice(row,num), getDescription(row,num) ))
             }
         }
-    }
 
-	val seats
-    get() = hiddenSeats.toList()
+        return seats
+    }
 }
