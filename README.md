@@ -1,4 +1,5 @@
 # Theater Booking System
+
 A simple Spring Boot application written in Kotlin
 
 I initially created this application as part of an online course for building Spring Boot applications with Kotlin.  Once I was done with the course, however, I went back and refactored the application to make the patterns more consistent and to achieve a little more polish (filling in some user experience gaps).
