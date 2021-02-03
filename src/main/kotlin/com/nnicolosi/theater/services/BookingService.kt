@@ -4,14 +4,10 @@ import com.nnicolosi.theater.repositories.IBookingRepository
 import com.nnicolosi.theater.domain.Booking
 import com.nnicolosi.theater.domain.Performance
 import com.nnicolosi.theater.domain.Seat
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
 @Service
-class BookingService  {
-
-    @Autowired
-    lateinit var bookingRepository: IBookingRepository
+class BookingService (val bookingRepository: IBookingRepository)  {
 
     fun findBooking(seat: Seat, performance: Performance): Booking? {
         return bookingRepository.findAll().firstOrNull { it.seat == seat && it.performance == performance}

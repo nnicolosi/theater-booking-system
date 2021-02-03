@@ -2,15 +2,11 @@ package com.nnicolosi.theater.services
 
 import com.nnicolosi.theater.domain.Performance
 import com.nnicolosi.theater.repositories.IPerformanceRepository
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.util.*
 
 @Service
-class PerformanceService {
-
-    @Autowired
-    lateinit var performanceRepository: IPerformanceRepository
+class PerformanceService (val performanceRepository: IPerformanceRepository) {
 
     fun findAll(): List<Performance> = performanceRepository.findAll()
 

@@ -1,14 +1,10 @@
 package com.nnicolosi.theater.services
 
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.math.BigDecimal
 
 @Service
-class ReportService {
-
-    @Autowired
-    lateinit var bookingService: BookingService
+class ReportService (val bookingService: BookingService) {
 
     fun all_bookings() : String {
         val bookings = bookingService.findAll()

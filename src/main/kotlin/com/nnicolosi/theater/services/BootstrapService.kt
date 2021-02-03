@@ -2,18 +2,14 @@ package com.nnicolosi.theater.services
 
 import com.nnicolosi.theater.domain.Performance
 import com.nnicolosi.theater.domain.Seat
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import java.math.BigDecimal
 
 @Service
-class BootstrapService {
-
-    @Autowired
-    lateinit var seatService: SeatService
-
-    @Autowired
-    lateinit var performanceService: PerformanceService
+class BootstrapService (
+    val seatService: SeatService,
+    val performanceService: PerformanceService
+        ) {
 
     fun initialize() {
         if (seatService.findAll().isEmpty()) {

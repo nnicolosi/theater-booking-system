@@ -6,7 +6,6 @@ import com.nnicolosi.theater.domain.Seat
 import com.nnicolosi.theater.services.BookingService
 import com.nnicolosi.theater.services.PerformanceService
 import com.nnicolosi.theater.services.SeatService
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
@@ -14,16 +13,10 @@ import org.springframework.web.servlet.ModelAndView
 
 @Controller
 @RequestMapping("/booking")
-class BookingController {
-
-    @Autowired
-    lateinit var bookingService: BookingService
-
-    @Autowired
-    lateinit var seatService: SeatService
-
-    @Autowired
-    lateinit var performanceService: PerformanceService
+class BookingController (
+    val bookingService: BookingService,
+    val seatService: SeatService,
+    val performanceService: PerformanceService) {
 
     @RequestMapping("", method = [RequestMethod.GET])
     fun begin(): ModelAndView {
