@@ -20,7 +20,7 @@ class BootstrapService (
         }
     }
 
-    fun generateSeats(): List<Seat> {
+    private fun generateSeats(): List<Seat> {
         val seats = mutableListOf<Seat>()
 
         fun getPrice(row: Int, num: Int) : BigDecimal {
@@ -52,7 +52,7 @@ class BootstrapService (
         return seats
     }
 
-    fun generatePerformances(): List<Performance> {
+    private fun generatePerformances(): List<Performance> {
         return listOf(
             Performance(0, "Hamilton"),
             Performance(0, "Pirates of Penzance"),

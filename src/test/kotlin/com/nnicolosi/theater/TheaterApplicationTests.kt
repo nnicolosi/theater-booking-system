@@ -5,9 +5,8 @@ import org.junit.jupiter.api.TestInstance
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class TheaterApplicationTests {
-
     @Test
-    fun contextLoads() {
+    fun `context loads`() {
         assert(true).equals(true)
     }
 }
